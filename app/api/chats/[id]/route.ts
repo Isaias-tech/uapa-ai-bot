@@ -6,7 +6,7 @@ export async function PATCH(
   req: NextRequest,
   { params }: { params: { id: string } },
 ) {
-  const threadId = params.id;
+  const { id: threadId } = await params;
   const { messages } = await req.json();
 
   if (!messages || !Array.isArray(messages)) {
@@ -33,7 +33,7 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: { id: string } },
 ) {
-  const threadId = params.id;
+  const { id: threadId } = await params;
 
   await prisma.chatThread.delete({
     where: { id: threadId },

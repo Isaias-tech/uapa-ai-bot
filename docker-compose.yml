@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:16
+    container_name: chatapp-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: devbot
+      POSTGRES_PASSWORD: devbotpass
+      POSTGRES_DB: chatdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - chatapp-network
+
+volumes:
+  pgdata:
+
+networks:
+  chatapp-network:
